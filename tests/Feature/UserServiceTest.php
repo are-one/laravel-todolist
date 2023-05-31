@@ -21,12 +21,12 @@ class UserServiceTest extends TestCase
 
     public function testLoginSuccess()
     {
-        $this->assertTrue($this->userService->login('Arwan', 'arwan123'));
+        $this->assertTrue($this->userService->login('arwan', 'arwan123'));
     }
 
     public function testLoginUserNotFound()
     {
-        $this->assertFalse($this->userService->login('arwan', 'arwan'));
+        $this->assertFalse($this->userService->login('Arwan', 'arwan'));
     }
 
     function testLoginWrongPassword()
