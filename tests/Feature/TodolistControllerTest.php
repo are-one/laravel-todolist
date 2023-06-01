@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class TodolistControllerTest extends TestCase
@@ -45,6 +46,24 @@ class TodolistControllerTest extends TestCase
         ])->post("/todolist", [
             "todo" => "Arwan"
         ])
+            ->assertRedirect("/todolist");
+    }
+
+    public function testRemoveTodolist()
+    {
+        $this->withSession([
+            'user' => 'arwan',
+            'todolist' => [
+                [
+                    "id" => "1",
+                    "todo" => "Arwan"
+                ],
+                [
+                    "id" => "2",
+                    "todo" => "Prianto"
+                ]
+            ]
+        ])->post("/todolist/1/delete")
             ->assertRedirect("/todolist");
     }
 }
